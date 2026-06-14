@@ -13,12 +13,11 @@
 
 # 🔍 OSINT BROWSER EXTENSIONS ARSENAL
 
-> **Created by [Rocky Singh -
-"mrcyb4r"](https://github.com/mrcyb4r) Remoded by [viphacker100](https://github.com/viphacker100) · Built for investigators, researchers & digital forensics professionals**
+> **Created by [Rocky Singh - "mrcyb4r"](https://github.com/mrcyb4r) Remoded by [viphacker100](https://github.com/viphacker100) · Built for investigators, researchers & digital forensics professionals**
 
 [![GitHub Stars](https://img.shields.io/github/stars/viphacker100/osint-extensions?style=for-the-badge&color=00ff41&labelColor=0d1117&logo=github)](https://github.com/viphacker100)
 [![Last Updated](https://img.shields.io/badge/Updated-2025-00ff41?style=for-the-badge&labelColor=0d1117)](https://github.com/viphacker100)
-[![Extensions](https://img.shields.io/badge/Extensions-150%2B-00ff41?style=for-the-badge&labelColor=0d1117)](https://github.com/viphacker100)
+[![Extensions](https://img.shields.io/badge/Extensions-163%2B-00ff41?style=for-the-badge&labelColor=0d1117)](https://github.com/viphacker100)
 [![License](https://img.shields.io/badge/License-Educational-00ff41?style=for-the-badge&labelColor=0d1117)](https://github.com/viphacker100)
 
 [![TheCyberIndia YouTube](https://img.shields.io/badge/TheCyberIndia-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@TheCyberIndia)
@@ -37,10 +36,10 @@
 
 | Metric | Count |
 |--------|-------|
-| 🧩 Total Extensions | 150+ |
+| 🧩 Total Extensions | 163+ |
 | 📂 Categories | 22 |
-| 🎯 OSINT-Specific Tools | 40+ |
-| 🔒 OPSEC Tools | 10+ |
+| 🎯 OSINT-Specific Tools | 50+ |
+| 🔒 OPSEC Tools | 12+ |
 
 ---
 
@@ -121,7 +120,7 @@
 | [Forensic OSINT Screen Capture](https://chromewebstore.google.com/detail/forensic-osint-full-page/jojaomahhndmeienhjihojidkddkahcn) | Screen and video captures from platforms like YouTube, TikTok, and more with metadata preservation. | `FORENSIC` `⭐ KEY` |
 | [InVID & WeVerify](https://chrome.google.com/webstore/detail/fake-news-debunker-by-inv/mhccpoafgdgbhnjfhkcmgknndkeenfhe) | Verification Swiss army knife for journalists, fact-checkers, and human rights defenders. | `VERIFY` `⭐ KEY` |
 | [Resemble AI Deepfake Detector](https://chromewebstore.google.com/detail/resemble-ai-deepfake-dete/ligejojghpehckjpfldljdcckgcbngle) | Scans web images, videos, and audio for AI-generated or manipulated media. | `AI` `DEEPFAKE` |
-| [Perceptual Image Analysis](https://chrome.google.com/webstore/detail/perceptual-image-analysis/gidmeabdffonnejjlkbglmppmfniakdf/) | Image forensics: testing images for viewable irregularities and tampering. | `FORENSIC` |
+| [Perceptual Image Analysis](https://chrome.google.com/webstore/detail/perceptual-image-analysis/gidmeabdffonnejjlkbglmppmfliakdf/) | Image forensics: testing images for viewable irregularities and tampering. | `FORENSIC` |
 | [PhotOSINT](https://chrome.google.com/webstore/detail/photosint/gonhdjmkgfkokhkflfhkbiagbmoolhcd) | Automatically scans a page for images with EXIF metadata while browsing. | `EXIF` `OSINT` |
 | [RevEye Reverse Image Search](https://chrome.google.com/webstore/detail/reveye-reverse-image-sear/keaaclcjhehbbapnphnmpiklalfhelgf) | Reverse image search using Google, Bing, Yandex, and TinEye simultaneously. | `REVERSE IMAGE` `⭐ KEY` |
 | [Search by Image](https://chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci) | Reverse image search with support for Google, Bing, Yandex, Baidu, and TinEye. | `REVERSE IMAGE` |
@@ -140,6 +139,7 @@
 
 | Extension | Description | Tags |
 |-----------|-------------|------|
+| [AdNauseam](https://chrome.google.com/webstore/search/AdNauseam) | Blocks ads AND silently clicks them in the background to obfuscate your browsing profile and confuse tracking networks. | `OPSEC` `PRIVACY` |
 | [Canvas Fingerprint Defender](https://chrome.google.com/webstore/detail/canvas-fingerprint-defend/lanfdkkpgfjfdikkncbnojekcppdebfp) | Defend against canvas fingerprinting by spoofing a randomized fake value. | `OPSEC` `FINGERPRINT` |
 | [Chaff](https://chrome.google.com/webstore/detail/chaff/jgjhamliocfhehbocekgcddfjpgdjnje) | Generate random web browsing traffic in the background to obfuscate actual behavior. | `OPSEC` |
 | [ClearURLs](https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk) | Automatically strip tracking elements and parameters from URLs before visiting. | `OPSEC` `⭐ KEY` |
@@ -191,18 +191,24 @@
 | [Distill Web Monitor](https://chrome.google.com/webstore/detail/distill-web-monitor/inlikjemeeknofckkjolnjbpehgadgge) | Monitor target webpages for changes with SMS and email alerts. | `MONITOR` |
 | [Files-Explorer](https://chromewebstore.google.com/detail/files-explorer/cmibdnmeihbjkdgnohgjeelkofcnfhid) | Browse and enumerate web-accessible directory listings on servers. | `RECON` |
 | [Google Similar Pages](https://chrome.google.com/webstore/detail/google-similar-pages/pjnfggphgdjblhfjaphkjhfpiiekbbej) | Discover websites similar to the one you're investigating. | `RECON` |
+| [Gotanda](https://chrome.google.com/webstore/detail/gotanda/jbmdcdfnnpenkgliplbglfpninigbiml) | Highlight any IOC (IP, domain, URL, SNS handle) on a page and instantly search across multiple OSINT engines via right-click. | `RECON` `THREAT INTEL` |
 | [HTML Inspector](https://chromewebstore.google.com/detail/html-inspector/fpaahdcndgfpbbddmgckaifkfljkfkhd) | Find hidden information, comments, and metadata in a target website's source. | `RECON` `⭐ KEY` |
 | [Instant Data Scraper](https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah) | Extract data from web pages and export as Excel or CSV with one click. | `SCRAPE` |
 | [Linkclump](https://chrome.google.com/webstore/detail/linkclump/lfpjkncokllnfokkgpkobnkbkmelfefj) | Open, copy, or bookmark multiple links at the same time via drag-select. | `LINKS` |
 | [Link Gopher](https://chrome.google.com/webstore/detail/link-gopher/bpjdkodgnbfalgghnbeggfbfjpcfamkf) | Extract all links from a page, sort, deduplicate, and display in a new tab. | `LINKS` `⭐ KEY` |
+| [Mitaka](https://chrome.google.com/webstore/detail/mitaka/bfjbejmeoibbdpfdbmbacmefcbannnbg) | Right-click to search IPs, domains, URLs, hashes, and emails across 80+ OSINT sources simultaneously. | `THREAT INTEL` `⭐ KEY` |
 | [OpenLink Structured Data Sniffer](https://chrome.google.com/webstore/detail/openlink-structured-data/egdaiaihbdoiibopledjahjaihbmjhdj) | Reveal structured metadata (Microdata, RDFa, JSON-LD) embedded in HTML. | `RECON` `METADATA` |
 | [Pulsedive Threat Intelligence](https://chrome.google.com/webstore/detail/pulsedive-threat-intellig/gdbemlfgncdmmljmkkcemfedbbfgghcp) | Highlight IPs, domains, and URLs on any page to instantly enrich with threat intel. | `THREAT INTEL` `⭐ KEY` |
 | [Save Page WE](https://chrome.google.com/webstore/detail/save-page-we/dhhpefjklgkmgeafimnjhojgjamoafof) | Save a complete web page as a single self-contained HTML file for offline review. | `ARCHIVE` |
+| [Shodan](https://chrome.google.com/webstore/detail/shodan/jjalcfnidlmpjhdfepjhjbhnhkbgleap) | Shows where a website is hosted, who owns the IP, and what ports/services are exposed — powered by Shodan's internet scanner. | `RECON` `THREAT INTEL` `⭐ KEY` |
 | [SingleFile](https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle) | Save web pages as complete, portable, single-file HTML archives with all resources. | `ARCHIVE` `⭐ KEY` |
 | [Sputnik](https://chromewebstore.google.com/detail/sputnik/manapjdamopgbpimgojkccikaabhmocd) | Instantly search highlighted IPs, domains, file hashes, and URLs across OSINT resources. | `THREAT INTEL` `⭐ KEY` |
 | [Teeto](https://chromewebstore.google.com/detail/teeto/jkonpljnfkapenfcfdhmilkbmnbalnml) | Identify hidden endpoints, secrets, API keys, and parameters within a webpage. | `RECON` `⭐ KEY` |
+| [threatxtension](https://chromewebstore.google.com/detail/threatxtension/imlahcmhiadncpalgcgimlddflchemgo) | Real-time OSINT overlay with DNS resolution, geolocation, port recon via Shodan, and multi-feed threat checks (Urlhaus, PhishTank, Google Safe Browsing). | `THREAT INTEL` `⭐ KEY` |
 | [ThreatPinch Lookup](https://chrome.google.com/webstore/detail/threatpinch-lookup/ljdgplocfnmnofbhpkjclbefmjoikgke) | Infosec threat intelligence and OSINT Swiss army knife — multi-source enrichment. | `THREAT INTEL` `⭐ KEY` |
 | [Visualping](https://visualping.io/) | Set up web page monitors and receive email alerts when changes are detected. | `MONITOR` |
+| [Vulners Web Scanner](https://chrome.google.com/webstore/search/Vulners%20Web%20Scanner) | Passively scans websites you visit for known CVEs using the Vulners vulnerability database. | `SECURITY` `RECON` |
+| [Wappalyzer](https://chrome.google.com/webstore/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg) | Identify CMS, frameworks, server tech, analytics tools, and more on any site — similar to BuiltWith but faster UI. | `RECON` `⭐ KEY` |
 | [Wayback Machine](https://chrome.google.com/webstore/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak) | Check and navigate archived snapshots of websites via the Internet Archive. | `ARCHIVE` `⭐ KEY` |
 | [Web Archives](https://chrome.google.com/webstore/detail/web-archives/hkligngkgcpcolhcnkgccglchdafcnao) | View archived and cached versions of web pages across 10+ web archives and caches. | `ARCHIVE` |
 
@@ -215,10 +221,12 @@
 | Extension | Description | Tags |
 |-----------|-------------|------|
 | [Context Menu Search](https://chrome.google.com/webstore/search/Context%20Menu%20Search) | Right-click selected text to instantly search across a customizable list of engines. | `SEARCH` |
+| [Fast Advanced Google Search](https://chrome.google.com/webstore/detail/fast-advanced-google-sear/idijdjdcncjcgmeiipcnkpjedhgepalk) | Adds a clean UI for Google's Advanced Search operators — filter by date, region, filetype, exact match, and more without typing dorks manually. | `SEARCH` `⭐ KEY` |
 | [Simple Search](https://chrome.google.com/webstore/detail/simple-search/bbpcngjcblhpkhadnbhgdjhmidojegha) | Adds a clean, traditional search results view without distractions. | `SEARCH` |
 | [Global Search Simulator](https://chrome.google.com/webstore/search/Global%20Search%20Simulator) | Simulate and compare search results from different countries and language settings. | `SEARCH` `GEO` `⭐ KEY` |
 | [GoogleSwitch](https://chrome.google.com/webstore/search/GoogleSwitch) | Quickly change Google Search language and country settings on the fly. | `SEARCH` |
 | [Mark My Search](https://chrome.google.com/webstore/search/Mark%20My%20Search) | Highlight keywords in search results for faster scanning. | `SEARCH` |
+| [Selection Search](https://chrome.google.com/webstore/detail/selection-search/gipnlpdeieaidmmeaichnddnmjmcakoe) | Select any text on a page and instantly search it across a customizable list of OSINT and general search engines via popup. | `SEARCH` `⭐ KEY` |
 | [uBlacklist](https://chrome.google.com/webstore/search/uBlacklist) | Block unwanted websites from appearing in Google search results. | `SEARCH` `FILTER` |
 | [Search & Link Preview](https://chrome.google.com/webstore/search/Search%20Link%20Preview) | Preview search result pages in a popup before navigating — saves time. | `SEARCH` |
 | [Save Search Results](https://chrome.google.com/webstore/search/Save%20Search%20Results) | Export your Google search results with one click. | `SEARCH` `EXPORT` |
@@ -234,6 +242,7 @@
 |-----------|-------------|------|
 | [Auto Scroll Search](https://chromewebstore.google.com/detail/auto-scroll-search-scroll/ieceeinfkigfaeoomfimmecebngempef) | Search for keywords while automatically scrolling through long pages. | `BROWSE` |
 | [Better History](https://chrome.google.com/webstore/search/Better%20History) | Feature-rich browser history viewer with improved search and filters. | `BROWSE` `HISTORY` |
+| [Bypass Paywalls Clean](https://github.com/bpc-clone/bypass-paywalls-chrome-clean) | Bypass paywalls on news sites (NYT, Bloomberg, WSJ, etc.) to access full articles during research. Install via GitHub. | `RESEARCH` `⭐ KEY` |
 | [Chikamichi](https://chrome.google.com/webstore/search/Chikamichi) | Unified search across open tabs, Chrome bookmarks, and browsing history. | `SEARCH` `BROWSE` |
 | [I still don't care about cookies](https://chrome.google.com/webstore/search/I%20still%20don't%20care%20about%20cookies) | Automatically dismiss cookie consent banners on almost all websites. | `BROWSE` `OPSEC` |
 | [Page Sidebar](https://chrome.google.com/webstore/search/Page%20Sidebar) | Open any web page in a side panel alongside your current tab. | `BROWSE` |
@@ -323,6 +332,7 @@
 | [Image Downloader - Imageye](https://chrome.google.com/webstore/search/Imageye) | Filter and download images from any web page with size and type filters. | `DOWNLOAD` |
 | [Enhance Image Viewer](https://chrome.google.com/webstore/search/Enhance%20Image%20Viewer) | Explore image details with advanced zoom, pan, and inspection tools. | `FORENSIC` |
 | [EXIF Viewer Classic](https://chrome.google.com/webstore/search/EXIF%20Viewer%20Classic) | Scan and reveal which page images contain EXIF metadata. | `EXIF` |
+| [Magnifying Glass](https://chrome.google.com/webstore/search/Magnifying%20Glass%20Browser) | Zoom into any area of a web page without losing context — useful for inspecting image details, small text, and map coordinates. | `FORENSIC` |
 | [RevEye Reverse Image Search](https://chrome.google.com/webstore/detail/reveye-reverse-image-sear/keaaclcjhehbbapnphnmpiklalfhelgf) | One-click reverse image search across Google, Bing, Yandex, and TinEye. | `REVERSE IMAGE` `⭐ KEY` |
 | [Search by Image](https://chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci) | Reverse image search with support for multiple search engine sources. | `REVERSE IMAGE` |
 | [View Image](https://chrome.google.com/webstore/search/View%20Image) | Restores the native "View Image" and "Search by Image" buttons in Google Image Search. | `BROWSE` |
@@ -460,6 +470,8 @@
 
 | Extension | Description | Tags |
 |-----------|-------------|------|
+| [OSINT Angel](https://chromewebstore.google.com/detail/osint-angel/jnokhdakmcfomhffgmeekfkcajndhkgg) | Browser extension for gathering and analyzing OSINT data from multiple sources in one place. | `OSINT` |
+| [Ubikron](https://www.ubikron.com/) | Investigation workbench by the creator of Maltego — auto-captures pages, extracts entities (emails, domains, crypto wallets, coordinates), enriches via 200+ sources (Epieos, Shodan, Dehashed, DomainTools), SHA-256 evidence hashing, and AI assistant. Chrome/Edge/Brave. | `OSINT` `AI` `FORENSIC` `⭐ KEY` |
 | [Vortimo OSINT-tool](https://www.vortimo.com/) | Track pages, extract information, highlight keywords, visualize connections, and perform graph analysis — all in one. | `OSINT` `⭐ KEY` |
 
 ---
