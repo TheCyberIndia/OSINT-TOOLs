@@ -2,8 +2,8 @@
 
 > A curated collection of browser extensions for OSINT research, investigations, and digital forensics.
 
-[![TheCyberIndia](https://img.shields.io/badge/TheCyberIndia-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@TheCyberIndia)
-[![TheCyberIndia](https://img.shields.io/badge/TheCyberIndia-Instagram-purple?style=for-the-badge&logo=instagram)](https://www.instagram.com/thecyberindia)
+[![CYBER GURU ](https://img.shields.io/badge/TheCyberIndia-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@Cyberguru092)
+[![CYBER GURU ](https://img.shields.io/badge/TheCyberIndia-Instagram-purple?style=for-the-badge&logo=instagram)](https://www.instagram.com/cyber_guru_9)
 
 ---
 
@@ -398,8 +398,8 @@ Feel free to open a pull request to add new OSINT extensions or update existing 
 
 Stay updated with the latest OSINT tips, tools, and tutorials:
 
-- 🎥 **YouTube:** [TheCyberIndia](https://www.youtube.com/@TheCyberIndia)
-- 📸 **Instagram:** [@TheCyberIndia](https://www.instagram.com/thecyberindia)
+- 🎥 **YouTube:** [TheCyberIndia](https://www.youtube.com/@Cyberguru092)
+- 📸 **Instagram:** [@TheCyberIndia](https://www.instagram.com/cyber_guru_9)
 
 ---
 
