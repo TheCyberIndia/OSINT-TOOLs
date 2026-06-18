@@ -1,0 +1,652 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #00ff41;
+  --green-dim: #00cc33;
+  --green-faint: #003300;
+  --green-glow: rgba(0,255,65,0.15);
+  --amber: #ffb300;
+  --cyan: #00eaff;
+  --red: #ff3333;
+  --bg: #020d02;
+  --card-bg: #040f04;
+  --border: rgba(0,255,65,0.25);
+  --border-active: rgba(0,255,65,0.6);
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  --font-display: 'Orbitron', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.terminal-wrap {
+  background: var(--bg);
+  min-height: 600px;
+  padding: 0 0 32px;
+}
+
+.scanlines {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 3px);
+}
+
+.header {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.status-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green-d { background: #27c93f; }
+
+.terminal-title {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: rgba(0,255,65,0.4);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  flex: 1;
+  text-align: center;
+}
+
+.main-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--green);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(0,255,65,0.5);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--green-dim);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.prompt-bar {
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--green-dim);
+  position: relative;
+  z-index: 1;
+}
+
+.prompt-symbol { color: var(--green); }
+
+.cursor {
+  display: inline-block;
+  width: 8px; height: 13px;
+  background: var(--green);
+  animation: blink 1.1s step-end infinite;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.stats-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 12px 16px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  display: block;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: rgba(0,255,65,0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.filter-row {
+  padding: 12px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: rgba(0,255,65,0.5);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--green-glow);
+  border-color: var(--green);
+  color: var(--green);
+  text-shadow: 0 0 8px rgba(0,255,65,0.6);
+}
+
+.search-row {
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  background: rgba(0,255,65,0.04);
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search-input::placeholder { color: rgba(0,255,65,0.25); }
+.search-input:focus { border-color: var(--green); background: rgba(0,255,65,0.06); }
+
+.content {
+  padding: 20px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0,255,65,0.35);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.category-block {
+  margin-bottom: 28px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-icon {
+  font-size: 14px;
+  min-width: 20px;
+}
+
+.cat-name {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.cat-count {
+  font-size: 10px;
+  color: rgba(0,255,65,0.4);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+}
+
+.toggle-arrow {
+  font-size: 10px;
+  color: rgba(0,255,65,0.4);
+  transition: transform 0.2s;
+}
+
+.category-header.collapsed .toggle-arrow { transform: rotate(-90deg); }
+
+.ext-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.ext-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+  overflow: hidden;
+}
+
+.ext-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--green-dim);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.ext-card:hover {
+  border-color: var(--green);
+  background: rgba(0,255,65,0.04);
+}
+
+.ext-card:hover::before { opacity: 1; }
+
+.ext-name {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ext-link {
+  color: rgba(0,255,65,0.35);
+  font-size: 9px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.ext-link:hover {
+  color: var(--green);
+  border-color: var(--green);
+  background: var(--green-glow);
+}
+
+.ext-desc {
+  color: rgba(0,255,65,0.45);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.hidden { display: none !important; }
+
+.no-results {
+  text-align: center;
+  color: rgba(0,255,65,0.3);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 40px 0;
+}
+
+.glitch {
+  animation: glitch 4s infinite;
+}
+
+@keyframes glitch {
+  0%,95%,100% { text-shadow: 0 0 20px rgba(0,255,65,0.5); }
+  96% { text-shadow: 3px 0 0 rgba(255,0,0,0.5), -3px 0 0 rgba(0,234,255,0.5); }
+  97% { text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,234,255,0.5); }
+  98% { text-shadow: 0 0 20px rgba(0,255,65,0.5); }
+}
+
+.tag {
+  display: inline-block;
+  font-size: 9px;
+  padding: 1px 5px;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.tag-ai { border: 1px solid rgba(0,234,255,0.3); color: var(--cyan); }
+.tag-opsec { border: 1px solid rgba(255,179,0,0.3); color: var(--amber); }
+.tag-critical { border: 1px solid rgba(255,51,51,0.3); color: var(--red); }
+</style>
+
+<div class="scanlines"></div>
+<div class="terminal-wrap">
+
+<div class="header">
+  <div class="header-top">
+    <div class="status-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green-d"></div>
+    </div>
+    <div class="terminal-title">viphacker100 // osint-arsenal v2.0</div>
+  </div>
+  <div class="main-title glitch">⬡ OSINT ARSENAL</div>
+  <div class="subtitle">&gt; BROWSER EXTENSION DATABASE // CURATED BY VIPHACKER100</div>
+</div>
+
+<div class="prompt-bar">
+  <span class="prompt-symbol">root@osint:~$</span>
+  <span>loading extension database...</span>
+  <span class="cursor"></span>
+</div>
+
+<div class="stats-row">
+  <div class="stat-item">
+    <span class="stat-num" id="total-count">150+</span>
+    <span class="stat-label">Extensions</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">22</span>
+    <span class="stat-label">Categories</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Free Intel</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" style="color:var(--red);">⚠</span>
+    <span class="stat-label">OPSEC First</span>
+  </div>
+</div>
+
+<div class="search-row">
+  <input class="search-input" type="text" id="search" placeholder="&gt; search extensions... (e.g. 'reverse image', 'social media', 'EXIF')" />
+</div>
+
+<div class="filter-row" id="filter-row">
+  <button class="filter-btn active" data-cat="all">ALL</button>
+  <button class="filter-btn" data-cat="AI">AI Tools</button>
+  <button class="filter-btn" data-cat="GEO">Geolocation</button>
+  <button class="filter-btn" data-cat="IMAGE">Image/Video</button>
+  <button class="filter-btn" data-cat="OPSEC">OPSEC</button>
+  <button class="filter-btn" data-cat="SOCIAL">Social Media</button>
+  <button class="filter-btn" data-cat="WEB">Website OSINT</button>
+  <button class="filter-btn" data-cat="SCRAPE">Data Scraping</button>
+  <button class="filter-btn" data-cat="ARCHIVE">Archiving</button>
+  <button class="filter-btn" data-cat="SEARCH">Searching</button>
+  <button class="filter-btn" data-cat="SECURITY">Security</button>
+</div>
+
+<div class="content" id="main-content">
+  <div class="section-label">// EXTENSION DATABASE INITIALIZED</div>
+</div>
+
+</div>
+
+<script>
+const DB = [
+  { cat: "AI", catLabel: "AI Tools", icon: "🤖", extensions: [
+    { name: "ChatGPT Assistant", desc: "Integrate OpenAI ChatGPT into your search engine and access it on any website.", url: "https://chrome.google.com/webstore/detail/chatgpt-assistant-smart-s/opngpmnmajecahkfibkbdkfckibnpajd", tag: "ai" },
+    { name: "Copyfish", desc: "Copy, paste and translate text from any image, video or PDF using OCR.", url: "https://chrome.google.com/webstore/detail/copyfish/eenjdnjldapjajjofmldgmkjaienebbj", tag: "ai" },
+    { name: "Google Translate", desc: "Highlight or right-click text to instantly translate while browsing.", url: "https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb" },
+    { name: "Project Naptha", desc: "Highlight, copy, edit, and translate text from any image on the web.", url: "https://chrome.google.com/webstore/detail/project-naptha/molncoemjfmpgdkbdlbjmhlcgniigdnf", tag: "ai" },
+    { name: "You.com", desc: "Experience the future of search with generative AI.", url: "https://chrome.google.com/webstore/detail/youcom-search-chat-and-cr/fhplnehgjpmohhldfnjhibanpbiedofi", tag: "ai" },
+    { name: "Glasp", desc: "YouTube & Article Summary powered by ChatGPT.", url: "https://chrome.google.com/webstore/detail/youtube-summary-with-chat/nmmicjeknamkfloonkhhcjmomieiodli" },
+    { name: "AI Prompt Genius", desc: "Build a custom library of AI prompts for faster research.", url: "https://chrome.google.com/webstore/search/AI%20Prompt%20Genius" },
+    { name: "Sider", desc: "Powerful AI assistant with quick access to multiple AI models.", url: "https://chrome.google.com/webstore/search/Sider%20AI", tag: "ai" },
+    { name: "Merlin", desc: "AI-powered assistant for AI-enabled browsing functions.", url: "https://chrome.google.com/webstore/search/Merlin%20AI", tag: "ai" },
+    { name: "Monica", desc: "AI assistant powered by popular AI models.", url: "https://chrome.google.com/webstore/search/Monica%20AI", tag: "ai" },
+    { name: "TinaMind", desc: "AI assistant with access to multiple AI-powered functions.", url: "https://chrome.google.com/webstore/search/TinaMind", tag: "ai" },
+    { name: "Text Blaze", desc: "Create and use custom prompt snippets anywhere.", url: "https://chrome.google.com/webstore/search/Text%20Blaze" },
+  ]},
+  { cat: "GEO", catLabel: "Geolocation OSINT", icon: "🌍", extensions: [
+    { name: "Map Switcher", desc: "Switch between map services, convert coordinates, and jump to same location on another map.", url: "https://chrome.google.com/webstore/detail/map-switcher/fanpjcbgdinjeknjikpfnldfpnnpkelb", tag: "critical" },
+    { name: "Bellingcat Filename Finder", desc: "Display filenames for images uploaded to Google Maps by users.", url: "https://chromewebstore.google.com/detail/bellingcat-filename-finde/fdhodjpkigpaachejkipcghppfnnfdmp", tag: "critical" },
+    { name: "Street View Tracker", desc: "Seamlessly integrate Google Street View with your research workflow.", url: "https://chromewebstore.google.com/detail/street-view-tracker/nlngoiabgfhbklfnidbhhcaakkojcocf" },
+  ]},
+  { cat: "IMAGE", catLabel: "Image & Video OSINT", icon: "🖼️", extensions: [
+    { name: "EXIF Viewer Pro", desc: "Quick access to EXIF metadata of any image you view in Chrome.", url: "https://chrome.google.com/webstore/detail/exif-viewer-pro/mmbhfeiddhndihdjeganjggkmjapkffm", tag: "critical" },
+    { name: "Exify", desc: "Show EXIF info by hovering the mouse over a photo.", url: "https://chrome.google.com/webstore/detail/exify/llhmhhnpmiikplpnkmbgbgmlenleecle" },
+    { name: "Fake Profile Detector", desc: "Detect if a profile image is GAN-generated or a real person.", url: "https://chrome.google.com/webstore/detail/fake-profile-detector/jbpcgcnnhmjmajjkgdaogpgefbnokpcc", tag: "ai" },
+    { name: "InVID & WeVerify", desc: "Verification Swiss army knife for journalists, fact-checkers, and human rights defenders.", url: "https://chrome.google.com/webstore/detail/fake-news-debunker-by-inv/mhccpoafgdgbhnjfhkcmgknndkeenfhe", tag: "critical" },
+    { name: "Resemble AI Deepfake Detector", desc: "Scans web images, videos, and audio for AI-generated or manipulated media.", url: "https://chromewebstore.google.com/detail/resemble-ai-deepfake-dete/ligejojghpehckjpfldljdcckgcbngle", tag: "ai" },
+    { name: "Perceptual Image Analysis", desc: "Image forensics: testing images for viewable irregularities.", url: "https://chrome.google.com/webstore/detail/perceptual-image-analysis/gidmeabdffonnejjlkbglmppmfniakdf/" },
+    { name: "PhotOSINT", desc: "Scans page for images with EXIF metadata while browsing.", url: "https://chrome.google.com/webstore/detail/photosint/gonhdjmkgfkokhkflfhkbiagbmoolhcd" },
+    { name: "RevEye Reverse Image Search", desc: "Reverse image search using Google, Bing, Yandex, and TinEye simultaneously.", url: "https://chrome.google.com/webstore/detail/reveye-reverse-image-sear/keaaclcjhehbbapnphnmpiklalfhelgf", tag: "critical" },
+    { name: "Search by Image", desc: "Reverse image search with support for Google, Bing, Yandex, Baidu, and TinEye.", url: "https://chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci" },
+    { name: "Hiya Deepfake Voice Detector", desc: "Deepfake Voice Detector for audio verification on any page.", url: "https://chromewebstore.google.com/detail/hiya-deepfake-voice-detec/akmieeldmgcllmokbpaibfelofjiilpc", tag: "ai" },
+    { name: "Forensic OSINT Screen Capture", desc: "Screen and video captures from platforms like YouTube, TikTok, and more.", url: "https://chromewebstore.google.com/detail/forensic-osint-full-page/jojaomahhndmeienhjihojidkddkahcn" },
+    { name: "YouTube Word Searcher", desc: "Search for specific words within YouTube video transcripts.", url: "https://chromewebstore.google.com/detail/youtube-word-searcher/jichoejagacnbcinlgncghhdegdlhbcj" },
+  ]},
+  { cat: "OPSEC", catLabel: "Obfuscation, OPSEC & Privacy", icon: "🔒", extensions: [
+    { name: "Canvas Fingerprint Defender", desc: "Defend against canvas fingerprinting by reporting a fake value.", url: "https://chrome.google.com/webstore/detail/canvas-fingerprint-defend/lanfdkkpgfjfdikkncbnojekcppdebfp", tag: "opsec" },
+    { name: "Chaff", desc: "Generate random web browsing traffic to obfuscate actual behavior.", url: "https://chrome.google.com/webstore/detail/chaff/jgjhamliocfhehbocekgcddfjpgdjnje", tag: "opsec" },
+    { name: "ClearURLs", desc: "Automatically remove tracking elements from URLs before visiting.", url: "https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk", tag: "opsec" },
+    { name: "Decentraleyes", desc: "Protect against tracking through centralized content delivery networks.", url: "https://chrome.google.com/webstore/detail/decentraleyes/ldpochfccmkkmhdbclfhpagapcfdljkj", tag: "opsec" },
+    { name: "Location Guard", desc: "Hide your geographic location from websites.", url: "https://chrome.google.com/webstore/detail/location-guard/cfohepagpmnodfdmjliccbbigdkfcgia", tag: "opsec" },
+    { name: "Netcraft Extension", desc: "Comprehensive site info and protection from phishing and malicious JS.", url: "https://chrome.google.com/webstore/detail/netcraft-extension/bmejphbfclcpmpohkggcjeibfilpamia" },
+    { name: "Privacy Badger", desc: "Automatically learns to block invisible trackers across the web.", url: "https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp", tag: "opsec" },
+    { name: "ToS;DR", desc: "Get instant ratings and summaries of website Terms of Service agreements.", url: "https://chrome.google.com/webstore/detail/terms-of-service-didn%E2%80%99t-r/hjdoplcnndgiblooccencgcggcoihigg" },
+    { name: "uBlock Origin", desc: "Wide-spectrum content blocker for ads, trackers, and malware.", url: "https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm", tag: "critical" },
+    { name: "User Agent Switcher", desc: "Impersonate another browser or OS to protect privacy and aid research.", url: "https://chrome.google.com/webstore/search/User%20Agent%20Switcher%20for%20Chrome", tag: "opsec" },
+  ]},
+  { cat: "SOCIAL", catLabel: "Social Media OSINT", icon: "📱", extensions: [
+    { name: "DumpItBlue+", desc: "Dump Facebook data for analysis or reporting purposes.", url: "https://chrome.google.com/webstore/detail/dumpitblue%2B/igmgknoioooacbcpcfgjigbaajpelbfe", tag: "critical" },
+    { name: "Email Extract", desc: "Searches email addresses on pages you visit automatically.", url: "https://chrome.google.com/webstore/detail/email-extract/ejecpjcajdpbjbmlcojcohgenjngflac" },
+    { name: "Email Extractor", desc: "Automatically fetches valid email IDs from web pages.", url: "https://chrome.google.com/webstore/detail/email-extractor/jdianbbpnakhcmfkcckaboohfgnngfcc" },
+    { name: "L.O.C", desc: "Tools for downloading Facebook content and analysis.", url: "https://chrome.google.com/webstore/detail/loc/eojdckfcadamkapabechhbnkleligand" },
+    { name: "Picuki Switcher", desc: "Redirects Instagram URL profile to Picuki.com for anonymous viewing.", url: "https://chrome.google.com/webstore/detail/picuki-switch/elmbjjhgiifenlhffpjcjfkjmilbbfki", tag: "opsec" },
+    { name: "Reddit Enhancement Suite", desc: "A suite of modules that enhance your Reddit browsing experience.", url: "https://chrome.google.com/webstore/detail/reddit-enhancement-suite/kbmfpngjjgdllneeigpgjifpgocmfgmb" },
+    { name: "Return YouTube Comment Username", desc: "Replaces YouTube handles in comments with old usernames.", url: "https://chrome.google.com/webstore/detail/return-youtube-comment-us/kamibelompadnaekbellinmgbphoidmj" },
+    { name: "Sort For TikTok", desc: "Sort TikTok videos or users by most viewed for investigation.", url: "https://chrome.google.com/webstore/detail/sort-for-tiktok/piiiffonpmeolocfghlpeolmdabhiemi" },
+    { name: "Story Saver", desc: "Download & save stories from Facebook, Instagram, and WhatsApp.", url: "https://chrome.google.com/webstore/detail/story-saver/mafcolokinicfdmlidhaebadidhdehpk" },
+    { name: "TG Search Engine", desc: "Find Telegram groups and channels by keyword.", url: "https://chrome.google.com/webstore/detail/tg-search-engine/ilpgiemienkecbgdhdbgdjkafodgfojl", tag: "critical" },
+    { name: "Uniform Timezone Extension", desc: "Converts and standardizes social media post timestamps across timezones.", url: "https://chrome.google.com/webstore/detail/uniform-timezone-extensio/fhpdgikedeljapdckiegnjiendkhphlg", tag: "critical" },
+    { name: "vidIQ Vision for YouTube", desc: "YouTube analyser to uncover analytics behind YouTube videos.", url: "https://chrome.google.com/webstore/detail/vidiq-vision-for-youtube/pachckjkecffpdphbpmfolblodfkgbhl" },
+    { name: "Image Downloader", desc: "Find, choose, and bulk download images from any web page.", url: "https://chrome.google.com/webstore/detail/image-downloader-save-pho/lbohagbplppjcpllnhdichjldhfgkicb" },
+    { name: "Video Downloader Plus", desc: "Download videos from Facebook, Instagram, Twitter & Vimeo.", url: "https://chrome.google.com/webstore/detail/video-downloader-plus/hkdmdpdhfaamhgaojpelccmeehpfljgf" },
+    { name: "TikNote / TikTok Downloader", desc: "Download TikTok videos without watermark for preservation.", url: "https://chrome.google.com/webstore/detail/tiknote-video-downloader/jilgamolkonoalagcpgjjijaclacillb" },
+  ]},
+  { cat: "WEB", catLabel: "Website OSINT", icon: "🌐", extensions: [
+    { name: "BuiltWith Technology Profiler", desc: "Find out what technologies a website is built with.", url: "https://chromewebstore.google.com/detail/builtwith-technology-prof/dapjbgnjinbpoindlpdmhochffioedbn", tag: "critical" },
+    { name: "Country Flags & IP Whois", desc: "Displays country flag, Whois and Geo info of website's server.", url: "https://chrome.google.com/webstore/detail/country-flags-ip-whois/bffjckjhidlcnenenacdahhpbacpgapo" },
+    { name: "HTML Inspector", desc: "Find hidden information in a target website's source for OSINT research.", url: "https://chromewebstore.google.com/detail/html-inspector/fpaahdcndgfpbbddmgckaifkfljkfkhd" },
+    { name: "OpenLink Structured Data Sniffer", desc: "Reveals structured metadata (Microdata, RDFa, JSON-LD) embedded in HTML.", url: "https://chrome.google.com/webstore/detail/openlink-structured-data/egdaiaihbdoiibopledjahjaihbmjhdj", tag: "critical" },
+    { name: "Pulsedive Threat Intelligence", desc: "Highlight IPs, domains, URLs to enrich with threat intelligence data.", url: "https://chrome.google.com/webstore/detail/pulsedive-threat-intellig/gdbemlfgncdmmljmkkcemfedbbfgghcp", tag: "critical" },
+    { name: "Sputnik", desc: "Quickly search IPs, Domains, File Hashes, and URLs using OSINT resources.", url: "https://chromewebstore.google.com/detail/sputnik/manapjdamopgbpimgojkccikaabhmocd", tag: "critical" },
+    { name: "ThreatPinch Lookup", desc: "Infosec threat and OSINT Swiss army knife for your browser.", url: "https://chrome.google.com/webstore/detail/threatpinch-lookup/ljdgplocfnmnofbhpkjclbefmjoikgke", tag: "critical" },
+    { name: "Teeto", desc: "Identify endpoints, secrets, and parameters within a webpage.", url: "https://chromewebstore.google.com/detail/teeto/jkonpljnfkapenfcfdhmilkbmnbalnml" },
+    { name: "Files-Explorer", desc: "File explorer for web-accessible folders and directories.", url: "https://chromewebstore.google.com/detail/files-explorer/cmibdnmeihbjkdgnohgjeelkofcnfhid" },
+    { name: "Google Similar Pages", desc: "Discover webpages similar to the one you're currently browsing.", url: "https://chrome.google.com/webstore/detail/google-similar-pages/pjnfggphgdjblhfjaphkjhfpiiekbbej" },
+    { name: "Instant Data Scraper", desc: "Extracts data from web pages and exports as Excel or CSV.", url: "https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah" },
+    { name: "Link Gopher", desc: "Extracts all links, sorts, removes duplicates, and displays them.", url: "https://chrome.google.com/webstore/detail/link-gopher/bpjdkodgnbfalgghnbeggfbfjpcfamkf" },
+    { name: "Save Page WE / SingleFile", desc: "Save a complete web page as a single self-contained HTML file.", url: "https://chrome.google.com/webstore/detail/save-page-we/dhhpefjklgkmgeafimnjhojgjamoafof" },
+    { name: "Wayback Machine", desc: "Check archived versions of websites through the history of the Web.", url: "https://chrome.google.com/webstore/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak" },
+    { name: "Web Archives", desc: "View archived and cached versions of web pages on 10+ search engines.", url: "https://chrome.google.com/webstore/detail/web-archives/hkligngkgcpcolhcnkgccglchdafcnao" },
+    { name: "Distill Web Monitor", desc: "Monitor webpages for changes with SMS and email alerts.", url: "https://chrome.google.com/webstore/detail/distill-web-monitor/inlikjemeeknofckkjolnjbpehgadgge" },
+    { name: "Linkclump", desc: "Open, copy, or bookmark multiple links at the same time.", url: "https://chrome.google.com/webstore/detail/linkclump/lfpjkncokllnfokkgpkobnkbkmelfefj" },
+  ]},
+  { cat: "SCRAPE", catLabel: "Data Scraping", icon: "📊", extensions: [
+    { name: "Copytables", desc: "Scrape tabular data from websites — copy as rich text, HTML, or CSV.", url: "https://chromewebstore.google.com/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon", tag: "critical" },
+    { name: "Data Scraper", desc: "Feature-rich web scraper to harvest different types of web content.", url: "https://chrome.google.com/webstore/search/Data%20Scraper" },
+    { name: "Thunderbit", desc: "Powerful AI-based web scraper for modern sites.", url: "https://chrome.google.com/webstore/search/Thunderbit", tag: "ai" },
+  ]},
+  { cat: "ARCHIVE", catLabel: "Preserving Evidence & Archiving", icon: "💾", extensions: [
+    { name: "Awesome Screenshot", desc: "Full/partial page capture, annotations, and screencast recording.", url: "https://chrome.google.com/webstore/search/Awesome%20Screenshot", tag: "critical" },
+    { name: "Fireshot", desc: "Capture and save a full web page as PDF or image instantly.", url: "https://chrome.google.com/webstore/search/Fireshot" },
+    { name: "Forensic OSINT", desc: "Manually or automatically capture data and preserve digital evidence.", url: "https://chromewebstore.google.com/detail/forensic-osint-full-page/jojaomahhndmeienhjihojidkddkahcn", tag: "critical" },
+    { name: "Hunchly", desc: "Feature-rich tool to capture and organise data during online investigations.", url: "https://www.hunch.ly/", tag: "critical" },
+    { name: "SingleFile", desc: "Capture and save a full web page as a single self-contained HTML file.", url: "https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle" },
+    { name: "Zotero Connector", desc: "Save references to Zotero reference manager during research.", url: "https://chrome.google.com/webstore/search/Zotero%20Connector" },
+  ]},
+  { cat: "SEARCH", catLabel: "Searching & Research", icon: "🔎", extensions: [
+    { name: "Context Menu Search", desc: "Easy access to customisable list of search engines via right-click.", url: "https://chrome.google.com/webstore/search/Context%20Menu%20Search" },
+    { name: "Global Search Simulator", desc: "Compare search results with different language and country settings.", url: "https://chrome.google.com/webstore/search/Global%20Search%20Simulator", tag: "critical" },
+    { name: "GoogleSwitch", desc: "Easily change language and country settings for Google Search.", url: "https://chrome.google.com/webstore/search/GoogleSwitch" },
+    { name: "uBlacklist", desc: "Block websites from appearing in Google search results.", url: "https://chrome.google.com/webstore/search/uBlacklist" },
+    { name: "Keywords Everywhere", desc: "Display keyword data in Google search results.", url: "https://chrome.google.com/webstore/search/Keywords%20Everywhere" },
+    { name: "Unpaywall", desc: "Find free full-text versions of scholarly publications.", url: "https://chrome.google.com/webstore/search/Unpaywall" },
+    { name: "Google Scholar Button", desc: "Access Google Scholar from any website with one click.", url: "https://chrome.google.com/webstore/search/Google%20Scholar%20Button" },
+  ]},
+  { cat: "SECURITY", catLabel: "Security & Privacy", icon: "🔐", extensions: [
+    { name: "NoScript", desc: "Popular script blocker for Chrome and Firefox — stops malicious JS.", url: "https://chrome.google.com/webstore/search/NoScript", tag: "opsec" },
+    { name: "Ghostery", desc: "Blocks ads, stops trackers, and speeds up browsing.", url: "https://chrome.google.com/webstore/search/Ghostery", tag: "opsec" },
+    { name: "Click&Clean", desc: "Delete cache, cookies, history, and more with a single click.", url: "https://chrome.google.com/webstore/search/Click%20and%20Clean", tag: "opsec" },
+    { name: "LastPass", desc: "Popular free password manager for secure credential storage.", url: "https://chrome.google.com/webstore/search/LastPass" },
+    { name: "Chrome Extension Source Viewer", desc: "View the source code of any Chrome extension before installing.", url: "https://chrome.google.com/webstore/search/Chrome%20Extension%20Source%20Viewer", tag: "critical" },
+    { name: "Extensity", desc: "Quickly enable and disable Chrome extensions for clean OPSEC profiles.", url: "https://chrome.google.com/webstore/search/Extensity", tag: "opsec" },
+  ]},
+];
+
+let activeFilter = 'all';
+let searchQuery = '';
+
+function renderTag(tag) {
+  if (!tag) return '';
+  const map = { ai: ['tag-ai','AI'], opsec: ['tag-opsec','OPSEC'], critical: ['tag-critical','KEY'] };
+  const [cls, label] = map[tag] || ['',''];
+  return `<span class="tag ${cls}">${label}</span>`;
+}
+
+function renderExtCard(ext) {
+  return `<div class="ext-card">
+    <div class="ext-name">
+      <span>${ext.name}</span>
+      <a class="ext-link" href="${ext.url}" target="_blank">INSTALL ↗</a>
+    </div>
+    <div class="ext-desc">${ext.desc}</div>
+    ${renderTag(ext.tag)}
+  </div>`;
+}
+
+function filterExtensions(extensions) {
+  if (!searchQuery) return extensions;
+  const q = searchQuery.toLowerCase();
+  return extensions.filter(e => 
+    e.name.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q)
+  );
+}
+
+function render() {
+  const content = document.getElementById('main-content');
+  let html = '<div class="section-label">// EXTENSION DATABASE INITIALIZED</div>';
+  let totalShown = 0;
+
+  const filteredDB = activeFilter === 'all' ? DB : DB.filter(c => c.cat === activeFilter);
+
+  filteredDB.forEach(category => {
+    const exts = filterExtensions(category.extensions);
+    if (exts.length === 0) return;
+    totalShown += exts.length;
+
+    html += `<div class="category-block" data-cat="${category.cat}">
+      <div class="category-header" onclick="toggleCat(this)">
+        <span class="cat-icon">${category.icon}</span>
+        <span class="cat-name">${category.catLabel}</span>
+        <span class="cat-count">${exts.length}</span>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="ext-grid">
+        ${exts.map(renderExtCard).join('')}
+      </div>
+    </div>`;
+  });
+
+  if (totalShown === 0) {
+    html += `<div class="no-results">&gt; NO RESULTS FOUND // REFINE QUERY</div>`;
+  }
+
+  content.innerHTML = html;
+
+  const countEl = document.getElementById('total-count');
+  if (countEl) countEl.textContent = totalShown;
+}
+
+function toggleCat(header) {
+  const grid = header.nextElementSibling;
+  const isCollapsed = header.classList.contains('collapsed');
+  if (isCollapsed) {
+    header.classList.remove('collapsed');
+    grid.style.maxHeight = '';
+  } else {
+    header.classList.add('collapsed');
+    grid.style.maxHeight = '0';
+  }
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.cat;
+    render();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  render();
+});
+
+render();
+</script>
