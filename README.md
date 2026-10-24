@@ -83,6 +83,7 @@
 | [Perceptual Image Analysis](https://chrome.google.com/webstore/detail/perceptual-image-analysis/gidmeabdffonnejjlkbglmppmfniakdf/) | Image forensics: testing images for viewable irregularities. |
 | [PhotOSINT](https://chrome.google.com/webstore/detail/photosint/gonhdjmkgfkokhkflfhkbiagbmoolhcd) | Scans page for images with EXIF metadata while browsing. |
 | [RevEye Reverse Image Search](https://chrome.google.com/webstore/detail/reveye-reverse-image-sear/keaaclcjhehbbapnphnmpiklalfhelgf) | Reverse image search using Google, Bing, Yandex, and TinEye. |
+| [Reverse Image Search Anywhere](https://reverseimage.app/) | Free browser extension and web tool for comparing Google Lens, Yandex, Bing Visual, and TinEye results, including images on sites that hide image URLs. |
 | [Search by Image](https://chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci) | Reverse image search with support for Google, Bing, Yandex, Baidu, and TinEye. |
 | [Screenshot YouTube](https://chrome.google.com/webstore/detail/screenshot-youtube/gjoijpfmdhbjkkgnmahganhoinjjpohk) | Adds a Screenshot button to YouTube video player. |
 | [YouTube Word Searcher](https://chromewebstore.google.com/detail/youtube-word-searcher/jichoejagacnbcinlgncghhdegdlhbcj) | Search for specific words within YouTube videos. |
